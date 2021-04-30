@@ -1,0 +1,22 @@
+version: '3.9'
+services:
+  mysql-container:
+    restart: always
+    image: mysql:8.0.18
+    container_name: mysql-container
+    environment:
+      MYSQL_ROOT_PASSWORD: developer@@
+    volumes:
+      - /data/mysql
+    ports:
+      - "33009:3306"
+  egg-management-server:
+    build:
+      context: ../egg-management-production-core/
+      dockerfile: Dockerfile
+    image: egg-management-production-core
+    container_name: egg-management-production-core
+    restart: on-failure
+    ports:
+      - "9099:9099"
+

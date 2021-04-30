@@ -1,0 +1,12 @@
+version: '3'
+services:
+  mysql-delta-container:
+    image: mysql:8.0.18
+    environment:
+      MYSQL_ROOT_PASSWORD: developer@@
+    volumes:
+      - /data/mysql
+
+
+
+

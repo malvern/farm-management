@@ -1,0 +1,50 @@
+spring:
+  profiles:
+    active: dev
+server:
+  port: 9099
+logging:
+  level:
+    root: INFO
+    org:
+      springframework: ERROR
+      hibernate: ERROR
+    zw.co.econet: DEBUG
+  pattern:
+    file: '%d - %-5level %logger{36} - %msg%n'
+    console:  '%d - %-5level %logger{36} - %msg%n'
+  file:
+    name: /data/logs/farm-management/egg-man-core.log
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database: mysql
+    show-sql: false
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+  datasource:
+    username: root
+    password: developer@@
+    url: jdbc:mysql://localhost:3306/egg_production_dev?autoReconnect=true&createDatabaseIfNotExist=true&useSSL=false&useUnicode=yes&characterEncoding=UTF-8&allowLoadLocalInfile=true&allowPublicKeyRetrieval=true
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      maximum-pool-size: 400
+      idle-timeout: 30000
+      minimum-idle: 20
+    initialization-mode: always
+    driver-class-name: com.mysql.cj.jdbc.Driver
+---
+spring:
+  config:
+    activate:
+      on-profile: uat
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+---
